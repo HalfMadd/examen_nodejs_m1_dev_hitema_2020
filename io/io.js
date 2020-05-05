@@ -1,13 +1,13 @@
-const fs = require('fs');
-const util = require('util');
+const fs = require("fs");
 
-const readPromise = util.promisify(fs.readFile);
-
-module.exports.decodeHexFileContent = (filePath) =>  {
+module.exports.decodeHexFileContent = (filePath) => {
     return new Promise((resolve, reject) => {
-        readPromise(filePath, 'hex', function(err, data){
-            
-        });
-        resolve();
-    });
-}
+    try {
+        const file = fs.readFileSync(filePath).toString();
+        const hexToString = Buffer.from(file, 'hex').toString('utf8');
+        resolve(hexToString);
+    } catch (exception) {
+        reject(exception);
+    }
+  });
+};
