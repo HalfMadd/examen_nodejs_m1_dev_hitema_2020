@@ -6,10 +6,13 @@ module.exports = class PeopleService {
     }
 
     updatePeople(id, people) {
-        // To be implemented!
+        this.peoples[id].name = people;
     }
     
     getPeople(filters) {
-        // To be implemented!
+        if(filters === '') return this.peoples.find().toArray();
+
+        if(filters !== '') return this.peoples[filters];
+
     }
 }
